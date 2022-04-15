@@ -1,0 +1,22 @@
+{
+   "name": "@34fame/utils",
+   "version": "0.2.0",
+   "description": "Custom JavaScript utilities library",
+   "main": "index.js",
+   "author": "Troy Moreland <troy@34fame.com>",
+   "license": "MIT",
+   "devDependencies": {
+      "@babel/core": "^7.17.8",
+      "@babel/node": "^7.16.8",
+      "@babel/preset-env": "^7.16.11"
+   },
+   "dependencies": {
+      "lodash": "^4.17.21"
+   },
+   "scripts": {
+      "version:major": "npm version major",
+      "version:minor": "npm version minor",
+      "version:patch": "npm version patch",
+      "publish": "npm publish --access public"
+   }
+}
