@@ -1,6 +1,6 @@
 {
    "name": "@34fame/utils",
-   "version": "0.2.1",
+   "version": "0.2.2",
    "description": "Custom JavaScript utilities library",
    "main": "index.js",
    "author": "Troy Moreland <troy@34fame.com>",
