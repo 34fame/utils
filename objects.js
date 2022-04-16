@@ -19,3 +19,14 @@ exports.objectDiffs = (newObj, baseObj) => {
       }
    })
 }
+
+/**
+ * isEmptyObject - Checks if value is an empty object
+ * @param  {Object} obj    Object to check
+ * @return {boolean}       Returns true if empty else false
+ */
+exports.isEmptyObject = (obj) => {
+   if (typeof obj !== 'object') return false
+   for (key in obj) return false
+   return true
+}
