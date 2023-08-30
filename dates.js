@@ -1,3 +1,5 @@
+const MILLISECONDS_IN_HOUR = 3.6e6
+
 /**
  * @function
  * @name adjustDate
@@ -149,6 +151,22 @@ exports.diffInDays = (firstDate, secondDate) => {
 
 /**
  * @function
+ * @name diffInHours
+ * @description Returns the difference in timestamps in hours (rounded to 2 decimals)
+ * @param  {number}  firstTimestamp   Typically older timestamp
+ * @param  {number}  secondTimestamp  Typically new timestamp
+ * @return {number}  Number of hours (secondTimestamp - firstTimestamp)
+ */
+exports.diffInHours = (firstTimestamp, secondTimestamp) => {
+   if (typeof firstTimestamp !== 'number' || typeof secondTimestamp !== 'number') return false
+   let diff = secondTimestamp - firstTimestamp
+   diff = diff / MILLISECONDS_IN_HOUR
+   diff = Math.round(diff * 100) / 100
+   return diff
+}
+
+/**
+ * @function
  * @name getUserLocale
  * @description Determines the locale
  * @return {string}  Locale code (e.g. "en-US")
@@ -185,6 +203,33 @@ exports.formatDate = ({ timestamp = new Date().valueOf, options }) => {
    const dt = new Date(timestamp)
    const locale = Intl.DateTimeFormat().resolvedOptions().locale || 'en-US'
    return Intl.DateTimeFormat(locale, options).format(dt)
+}
+
+/**
+ * @function
+ * @name timeStringToTimestamp
+ * @description Returns timestamp from a time string (e.g. "11:23 PM")
+ * @param  {string} timeString   String containing time using "h:mm A" format
+ * @return {number}              Timestamp using today for date and timeString for time
+ */
+exports.timeStringToTimestamp = (timeStr) => {
+   if (typeof timeStr !== 'string') return timeStr
+   const strSplit = timeStr.split(' ')
+   if (strSplit.length !== 2) return timeStr
+   const timeSplit = strSplit[0].split(':')
+   if (timeSplit.length !== 2) return timeStr
+
+   let hours =
+      strSplit[1].toUpperCase() === 'PM'
+         ? Number(timeSplit[0]) + 12
+         : Number(timeSplit[0])
+   let minutes = Number(timeSplit[1])
+
+   let dt = new Date()
+   dt.setHours(hours)
+   dt.setMinutes(minutes)
+   dt.setSeconds(0)
+   return dt.valueOf()
 }
 
 /**
